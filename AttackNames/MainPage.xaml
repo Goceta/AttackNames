@@ -16,6 +16,7 @@
         <CommandBar Grid.Row="0" IsSticky="True">
             <CommandBar.SecondaryCommands>
                 <AppBarButton Label="Add" Icon="Add" ClickMode="Press" Click="AddButton_Click" />
+                <AppBarButton Label="SaveDatabase" Icon="Add" ClickMode="Press" Click="SaveButton_Click" />
             </CommandBar.SecondaryCommands>
         </CommandBar>
 

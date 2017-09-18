@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml.Media.Imaging;
+using AttackNames.Metadata;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -35,9 +36,10 @@ namespace AttackNames
             this.imagesGridView.ItemsSource = imagesCollection;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-
+            LocalDatabase temp = new LocalDatabase();
+            temp.SaveDatabase();
         }
 
         private async void AddButton_Click(object sender, RoutedEventArgs e)
