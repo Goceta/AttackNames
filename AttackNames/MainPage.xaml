@@ -3,6 +3,8 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:AttackNames"
+    xmlns:UserControls="using:AttackNames.UserControls"
+    xmlns:ViewModels="using:AttackNames.ViewModels"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
@@ -15,7 +17,9 @@
 
         <CommandBar Grid.Row="0" IsSticky="True">
             <CommandBar.SecondaryCommands>
-                <AppBarButton Label="Add" Icon="Add" ClickMode="Press" Click="AddButton_Click" />
+                <AppBarButton Label="Add Image" ClickMode="Press" Click="AddImageButton_Click" />
+                <AppBarButton Label="Add Temporary" ClickMode="Press" Click="AddTemporaryButton_Click" />
+                <AppBarButton Label="Add Folder" ClickMode="Press" Click="AddFolderButton_Click" />
                 <AppBarButton Label="SaveDatabase" Icon="Add" ClickMode="Press" Click="SaveButton_Click" />
             </CommandBar.SecondaryCommands>
         </CommandBar>
@@ -37,14 +41,27 @@
                 <TextBlock Text="Search Filter Area" Grid.Row="0" />
                 <GridView Name="imagesGridView" Grid.Row="1" SelectionMode="None" ItemClick="imagesGridView_ItemClick" IsItemClickEnabled="True">
                     <GridView.ItemTemplate>
-                        <DataTemplate>
-                            <Image Source="{Binding}" />
+                        <DataTemplate x:DataType="ViewModels:ImageWrapper">
+                            <UserControls:ImagePreview PreviewFilepath="{x:Bind FilePath, Mode=OneWay}" PreviewImage="{x:Bind BitmapImage, Mode=OneWay}" />
                         </DataTemplate>
                     </GridView.ItemTemplate>
 
+                    <GridView.ItemContainerStyle>
+                        <Style TargetType="GridViewItem">
+                            <Setter Property="BorderThickness" Value="3" />
+                            <Setter Property="BorderBrush">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="LightGray" Opacity="0.25" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="Padding" Value="2" />
+                            <Setter Property="Margin" Value="0,0,5,5" />
+                        </Style>
+                    </GridView.ItemContainerStyle>
+
                     <GridView.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <ItemsWrapGrid ItemHeight="200" ItemWidth="200" Orientation="Horizontal" />
+                            <ItemsWrapGrid ItemHeight="260" ItemWidth="260" Orientation="Horizontal" />
                         </ItemsPanelTemplate>
                     </GridView.ItemsPanel>
                 </GridView>
@@ -54,16 +71,19 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
                 <TextBlock Text="Details" />
                 <ScrollViewer Grid.Row="1" BorderBrush="Black" BorderThickness="2">
                     <StackPanel>
                         <TextBlock Text="Preview:" />
-                        <Image Name="previewImage" Height="300" Width="300" />
-                        <TextBlock Text="Metadata Zone" />
+                        <UserControls:ImagePreview x:Name="previewImage" Height="300" Width="300" />
+                        <UserControls:Separator />
+                        <UserControls:EditableMetadata />
                     </StackPanel>
                 </ScrollViewer>
+                <Button x:Name="updateButton" Grid.Row="2" Click="updateButton_Click" Content="Update" Margin="0,12,0,0" />
             </Grid>
 
         </Grid>

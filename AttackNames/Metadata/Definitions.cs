@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AttackNames.Metadata
 {
@@ -11,5 +7,26 @@ namespace AttackNames.Metadata
         Game,
         Movie,
         Anime
+    }
+
+    public class MediaTypeHelper
+    {
+        public static string MediaTypeToString(MediaType mediaType)
+        {
+            return mediaType.ToString();
+        }
+
+        public static MediaType StringToMediaType(string mediaTypeStr)
+        {
+            MediaType result;
+            if (Enum.TryParse(mediaTypeStr, out result))
+            {
+                return result;
+            }
+            else
+            {
+                return MediaType.Anime; // default. TODO?: add a void/nothing enum to be the default?
+            }
+        }
     }
 }
