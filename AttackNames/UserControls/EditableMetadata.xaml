@@ -1,0 +1,26 @@
+﻿<UserControl
+    x:Class="AttackNames.UserControls.EditableMetadata"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:AttackNames.UserControls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Loading="OnLoading"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <StackPanel>
+        <local:TextPicker x:Name="attackName" Header="Attack Name" CategoryType="attacks" />
+        <local:Separator />
+        <local:TextPicker x:Name="titleName" Header="Title Name" CategoryType="titles" />
+        <local:Separator />
+        <local:TextPicker x:Name="franchiseName" Header="Franchise Name" CategoryType="franchises" />
+        <local:Separator />
+        <local:TextPicker x:Name="user" Header="User" CategoryType="users" />
+        <local:Separator />
+        <ComboBox x:Name="mediaTypes" Margin="0,8" HorizontalAlignment="Stretch" PlaceholderText="Media Type" />
+        <local:Separator />
+        <DatePicker x:Name="releaseDate" Header="Release Date" />
+    </StackPanel>
+</UserControl>
